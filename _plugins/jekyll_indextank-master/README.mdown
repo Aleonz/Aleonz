@@ -1,0 +1,41 @@
+## Jekyll + indextank = Static websites with powerful full-text search
+
+### How to use:
+* Place jekyll_indextank.rb inside the _plugins folder in the root of your jekyll site.
+* Add 'indextank_index', 'indextank_api_url' and optionally 'indextank_excludes' settings to your _config.yml
+
+All pages' main content will be indexed at indextank, now all you have to do is hook up some Javascript and ajax
+to a form to query the [indextank api](http://indextank.com/documentation/api#searching).  
+Note that, while at the time of writing, the indextank api docs do not show that the search api supports jsonp, it does.
+Just add `&callback=mycallback` to the api call.
+
+### How it works
+Everytime you generate your Jekyll site, all pages will be indexed at IndexTank. Now when you query the IndexTank search api,
+something like this will be returned:
+
+	{"matches": 1, "facets": {}, "search_time": "0.002", "results": [{"docid": "/blog/2009/01/04/colored-uiprogressview.html"}]}
+
+The "docid" field contains the absolute url (minus domain name) to the matched resource.
+
+### JavaScript usage example
+
+	$.getJSON("http://<your_api_key>.api.indextank.com/v1/indexes/<your_index>/search?q=<a query>&callback=?", function(json) {
+    	alert(json.results); //you might want to approve usability a bit ;-)
+	});
+
+  See examples/example.html for a basic example, showing results in a div.
+
+  For a live example see the search on my blog <http://pwiddershoven.nl>
+
+### Requirements
+Jekyll_indextank requires the following gems:
+
+* indextank
+* nokogiri
+
+For an example of available config settings, see example_config.yml.
+
+### Installation
+* gem install indextank nokogiri
+* rake build
+* copy build/jekyll_indextank.rb to your hyde site's _plugins folder
