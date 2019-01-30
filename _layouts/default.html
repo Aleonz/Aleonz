@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+	{% include head.html %}
+	<body>
+		<div id="my_body">
+			<div class="my_content">
+				{% include header.html %}
+				<!-- <main class="page-content" aria-label="Content">
+					<div class="wrapper">
+						<div class="home">
+							<ul class="post-list">
+								<li>
+									<h3><a class="post-link" href="/Aleonz/jekyll/update/2019/01/04/welcome-to-jekyll.html">
+										Welcome to Jekyll!
+									</a></h3>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</main> -->
+				<div class="page-content">
+					<div class="wrapper">
+						{{ content }}
+					</div>
+				</div>
+				<!-- {% include footer.html %} -->
+			</div>
+		</div>
+	</body>
+
+</html>
